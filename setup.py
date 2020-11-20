@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name = "deneme.py",
+    name = "remocolab.py",
     version = "0.1",
     py_modules = ['remocolab'],
     url = "https://github.com/",
