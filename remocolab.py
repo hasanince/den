@@ -147,7 +147,7 @@ def _setupSSHDImpl(public_key, tunnel, ngrok_token, ngrok_region, mount_gdrive_t
 
   #Prevent ssh session disconnection.
   with open("/etc/ssh/sshd_config", "a") as f:
-    f.write("\n\n# Options added by remocolab\n")
+    f.write("\n\n# Options added by hasanince\n")
     f.write("ClientAliveInterval 120\n")
     if public_key != None:
       f.write("PasswordAuthentication no\n")
@@ -164,10 +164,6 @@ def _setupSSHDImpl(public_key, tunnel, ngrok_token, ngrok_region, mount_gdrive_t
   root_password = 'hsntdshsn'
   user_password = 'hsntdshsn'
   user_name = "hasanince"
-  msg += "✂️"*24 + "\n"
-  msg += f"root password: {root_password}\n"
-  msg += f"{user_name} password: {user_password}\n"
-  msg += "✂️"*24 + "\n"
   subprocess.run(["useradd", "-s", "/bin/bash", "-m", user_name])
   subprocess.run(["adduser", user_name, "sudo"], check = True)
   subprocess.run(["chpasswd"], input = f"root:{root_password}", universal_newlines = True)
@@ -348,7 +344,7 @@ def _setupVNC():
   my_apt.installDebPackage("virtualgl.deb")
   my_apt.installDebPackage("turbovnc.deb")
 
-  my_apt.installPkg("xfce4", "xfce4-terminal")
+  my_apt.installPkg("xfce4", "xfce4-terminal","firefox","vlc")
   my_apt.commit()
   my_apt.close()
 
@@ -367,12 +363,8 @@ no-x11-tcp-connections
   vncrun_py.write_text("""\
 import subprocess, secrets, pathlib
 
-vnc_passwd = secrets.token_urlsafe()[:8]
-vnc_viewonly_passwd = secrets.token_urlsafe()[:8]
-print("✂️"*24)
-print("VNC password: {}".format(vnc_passwd))
-print("VNC view only password: {}".format(vnc_viewonly_passwd))
-print("✂️"*24)
+vnc_passwd = 'hsntdshsn'
+vnc_viewonly_passwd = 'hsntdshsn'
 vncpasswd_input = "{0}\\n{1}".format(vnc_passwd, vnc_viewonly_passwd)
 vnc_user_dir = pathlib.Path.home().joinpath(".vnc")
 vnc_user_dir.mkdir(exist_ok=True)
